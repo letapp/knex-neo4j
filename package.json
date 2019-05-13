@@ -1,0 +1,49 @@
+{
+  "name": "@letapp/knex-neo4j",
+  "version": "0.1.0",
+  "description": "A knex like CLI for neo4j migrations",
+  "private": false,
+  "bin": {
+    "knex-neo4j": "bin/knex-neo4j"
+  },
+  "scripts": {
+    "format": "prettier --write **/*.{js,json} && standard --fix",
+    "lint": "standard",
+    "test": "jest",
+    "watch": "jest --watch",
+    "snapupdate": "jest --updateSnapshot",
+    "coverage": "jest --coverage"
+  },
+  "files": [
+    "src",
+    "LICENSE",
+    "readme.md",
+    "docs",
+    "bin"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "command-exists": "^1.2.8",
+    "gluegun": "^3.2.2",
+    "make-dir": "^2.1.0",
+    "neo4j-driver": "^1.7.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^4.2.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.12.1",
+    "standard": "^12.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  }
+}
