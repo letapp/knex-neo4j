@@ -38,7 +38,7 @@ Once you have a config file, you can use the migration tool to create migration 
 $ knex-neo4j migrate:make migration_name
 ```
 
-Migration file will look like this:
+The migration file will be named `yyyymmddhhmmss_migration_name.js` and will contain the content like this:
 ```js
 exports.up = (run) => {
   return run(

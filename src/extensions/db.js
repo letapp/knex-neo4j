@@ -34,7 +34,7 @@ module.exports = async (toolbox) => {
       return result;
     } catch (error) {
       await transaction.rollback();
-      throw new Error(error);
+      throw new Error(`DB error:\n${error}`);
     } finally {
       session.close();
     }

@@ -39,9 +39,6 @@ module.exports = (toolbox) => {
       !config.connection,
       'Field "connection" is required in configuration file',
     );
-    if (!config.connection) {
-      throw new Error('Field "connection" is required in configuration file');
-    }
 
     invariant(
       !config.user,
