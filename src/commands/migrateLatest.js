@@ -51,10 +51,7 @@ module.exports = {
       const { dir, fileExtensions } = extensions.context.read('config');
 
       const files = await filesystem.list(dir);
-      invariant(
-        !files,
-        `The migrations directory not found at path: ${dir}`,
-      );
+      invariant(!files, `The migrations directory not found at path: ${dir}`);
 
       const allMigrations = files.filter(
         // prettier-ignore
@@ -68,11 +65,20 @@ module.exports = {
       allMigrations.sort();
 
       extensions.db.init();
-      const currentMigration = await extensions.db.getCurrentMigration();
+      const current = await extensions.db.getCurrentMigration();
 
-      const newMigrations = currentMigration
-        ? allMigrations.filter((item) => item > currentMigration.name)
-        : allMigrations;
+      let newMigrations = allMigrations;
+      if (current) {
+        const currentIndex = allMigrations.indexOf(current.name);
+        invariant(
+          currentIndex < 0,
+          `Migration file does not exist for current migration: ${
+            current.name
+          }. The migration directory is corrupt.`,
+        );
+
+        newMigrations = allMigrations.slice(currentIndex + 1);
+      }
 
       if (newMigrations.length === 0) {
         info('Already up to date');

@@ -56,18 +56,13 @@ module.exports = {
       await content.down(extensions.db.run);
 
       const files = await filesystem.list(dir);
-      const allMigrations = files.filter(
+      const all = files.filter(
         // prettier-ignore
         (i) => fileExtensions.includes(path.extname(i)),
       );
+      all.sort();
 
-      allMigrations.sort();
-      allMigrations.reverse();
-
-      const prevMigration = allMigrations.length > 0
-        ? allMigrations.find((item) => item < current.name)
-        : null;
-
+      const prevMigration = all[all.indexOf(current.name) - 1];
       await extensions.db.setCurrentMigration(
         prevMigration
           ? {
